@@ -1,0 +1,44 @@
+.container.p-3
+  .card.p-4
+    = search_form_for @q do |f|
+      .form-group
+        .div
+          = f.label :tweet_id_eq, 'ツイートID'
+          = f.text_field :tweet_id_eq, class: "form-control"
+        .div
+          = f.label :search_word_cont, '検索語'
+          = f.text_field :search_word_cont, class: "form-control"
+        .div
+          = f.label :user_name_cont, 'ユーザ名'
+          = f.text_field :user_name_cont, class: "form-control"
+        .div
+          = f.label :text_cont, 'ツイート本文'
+          = f.text_field :text_cont, class: "form-control"
+        .div
+          = f.label :tweet_date_lteq, 'ツイート日'
+          = f.search_field :tweet_date_lteq, class: "form-control"
+      = f.submit
+      = link_to 'クリア', request.path
+
+  h3 ツイート一覧
+  - if @tweet_records.present?
+    .table-responsive
+      table.table.table-striped
+        thead
+          tr
+            th ツイート日
+            th ツイートid
+            th 検索語
+            th ユーザ名
+            th ツイート本文
+        tbody
+          - @tweet_records.each do |t|
+            tr
+              td #{t.tweet_date.strftime("%Y年%m月%d日 %H:%M:%S")}
+              td #{t.tweet_id}
+              td #{t.search_word}
+              td #{t.user_name}
+              td #{t.text}
+    = paginate @tweet_records
+  - else
+    p ツイートが存在しません。

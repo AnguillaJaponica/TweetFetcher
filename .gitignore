@@ -31,4 +31,4 @@ yarn-debug.log*
 .yarn-integrity
 
 .idea/
-/lib/tweet.rb
+/lib/tweet_crawl.rb
